@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>AI Blog Generator</title>{% endblock title %}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body  class="bg-gray-100 font-sans antialiased">
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex items-center">
+            <!-- Logo on the left -->
+            <div class="text-white text-2xl font-bold flex-grow">
+                <a href="#" class="hover:text-gray-300">AI Blog Generator</a>
+            </div>
+    
+            <!-- Menu items in the center -->
+            <div class="hidden md:flex items-center justify-center space-x-4 flex-grow">
+                <a href="/" class="text-white hover:text-gray-300">Home</a>
+                <a href="#" class="text-white hover:text-gray-300">About</a>
+                <a href="#" class="text-white hover:text-gray-300">Services</a>
+                <a href="#" class="text-white hover:text-gray-300">Contact</a>
+            </div>
+    
+            <!-- User-related actions on the right -->
+            <div class="hidden md:flex items-center space-x-4 flex-grow justify-end">
+                {% if user.is_authenticated %}
+                <a href="#" class="text-white hover:text-gray-300">
+                    <i class="fas fa-user"></i> Welcome  <span class="text-red-700"> {{request.user|capfirst}}</span> 
+                </a>
+                <a href="{% url 'logout' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Login</a>
+                <a href="{% url 'signup' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Signup</a>
+                {% endif %}
+            </div>
+    
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+                <button id="menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    
+        <!-- Mobile dropdown menu -->
+        <div id="menu" class="md:hidden bg-gray-700 p-4 mt-2">
+            <a href="/" class="block text-white py-2 px-4 hover:bg-gray-600">Home</a>
+            <a href="#" class="block text-white py-2 px-4 hover:bg-gray-600">About</a>
+            <a href="#" class="block text-white py-2 px-4 hover:bg-gray-600">Services</a>
+            <a href="#" class="block text-white py-2 px-4 hover:bg-gray-600">Contact</a>
+            <a href="{% url 'login' %}" class="block text-white py-2 px-4 mt-2 bg-blue-500 rounded hover:bg-blue-600">Login</a>
+            <a href="{% url 'signup' %}" class="block text-white py-2 px-4 mt-2 bg-blue-500 rounded hover:bg-blue-600">Signup</a>
+        </div>
+    </nav>
+    
+
+{% block content %}{% endblock content %}
+
+<footer class="text-center p-4 text-black mt-6">
+    Powered By <a href="https://zainaliportfolio.netlify.app/">Zain Ali</a>
+</footer>
+
+
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>
